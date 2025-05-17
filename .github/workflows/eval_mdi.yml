@@ -17,7 +17,7 @@ jobs:
       cancel-in-progress: true
     runs-on: ubuntu-latest
     container:
-      image: mucoll-sim:master
+      image: ghcr.io/muoncollidersoft/mucoll-sim:master
       volumes:
         - data:/MuC_Data
     steps:

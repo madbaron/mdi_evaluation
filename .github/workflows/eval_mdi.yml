@@ -37,6 +37,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/muoncollidersoft/mucoll-sim:master
+          options: -v ${{ github.workspace }}:/work
           run: |
             echo "Setup MuC software stack"
             source /etc/profile.d/aliases.sh

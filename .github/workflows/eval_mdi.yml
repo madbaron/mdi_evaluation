@@ -40,6 +40,7 @@ jobs:
           options: -v ${{ github.workspace }}:/work -e ABC=123
           run: |
             echo "Setup MuC software stack"
+            source /etc/profile.d/aliases.sh
             setup_mucoll
             ddsim --version > /work/ddsim_version.txt
       - name: Upload Artifacts

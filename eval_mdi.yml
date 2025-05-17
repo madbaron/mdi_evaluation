@@ -1,0 +1,31 @@
+name: Evaluate MDI
+on: [push, workflow_dispatch]
+
+env:
+  REGISTRY: ghcr.io
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  attestations: write
+
+jobs:
+  sim-bib:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    container:
+      image: mucoll-sim:master
+      volumes:
+        - data:/MuC_Data
+    steps:
+      - name: Load MuC software stack
+        run: |
+          setup_mucoll
+      - name: Print Out stuff
+        run: |
+          echo "Printing out stuff"
+          ls -l /MuC_Data
+          ddsim --version

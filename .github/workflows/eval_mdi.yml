@@ -36,8 +36,7 @@ jobs:
       - name: Run Docker Container
         uses: addnab/docker-run-action@v3
         with:
-          registry: ghcr.io
-          image: muoncollidersoft/mucoll-sim:master
+          image: ghcr.io/muoncollidersoft/mucoll-sim:master
           options: -v ${{ github.workspace }}:/work -e ABC=123
           run: |
             echo "Setup MuC software stack"

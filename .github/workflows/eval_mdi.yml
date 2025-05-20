@@ -24,7 +24,8 @@ jobs:
           fetch-depth: 0
       - name: Run Docker Container
         uses: addnab/docker-run-action@v3
-        with: ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
+        with: 
+          image: ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
           options: -v ${{ github.workspace }}:/work
           run: |
             echo "Setup MuC software stack"

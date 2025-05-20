@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
-      data-volumes: |
-        /cvmfs:/cvmfs
-        /cvmfs/unpacked.cern.ch:/cvmfs/unpacked.cern.ch
+      volumes:
+        - /cvmfs:/cvmfs
+        - /cvmfs/unpacked.cern.ch:/cvmfs/unpacked.cern.ch
     steps:
       - uses: cvmfs-contrib/github-action-cvmfs@v4
       - name: Check if unpacked is there

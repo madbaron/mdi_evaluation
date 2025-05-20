@@ -17,16 +17,13 @@ jobs:
       cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
-      - uses: cvmfs-contrib/github-action-cvmfs@v4
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: Run Docker Container
         uses: addnab/docker-run-action@v3
+        uses: cvmfs-contrib/github-action-cvmfs@v4
         with: 
           image: ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
-          options: -v ${{ github.workspace }}:/work -v /cvmfs:/cvmfs
+          options: -v /cvmfs:/cvmfs 
+            #-v ${{ github.workspace }}:/work
           run: |
             echo "Setup MuC software stack"
             ls /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim\:latest/

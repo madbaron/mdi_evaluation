@@ -16,33 +16,14 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
+    container: ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: endersonmenezes/free-disk-space@v2
-        with:
-          remove_android: true
-          remove_dotnet: true
-          remove_haskell: true
-          remove_tool_cache: true
-          remove_swap: true
-          remove_packages: "azure-cli google-cloud-cli microsoft-edge-stable google-chrome-stable firefox postgresql* temurin-* *llvm* mysql* dotnet-sdk-*"
-          remove_packages_one_command: true
-          remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/share/glade* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell"
-          testing: false
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Run Docker Container
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ghcr.io/muoncollidersoft/mucoll-sim:master
-          options: -v ${{ github.workspace }}:/work
-          run: |
-            echo "Setup MuC software stack"
-            source /etc/profile.d/aliases.sh
-            setup_mucoll
-            ddsim --version > /github/workspace/ddsim_version.txt
+      - name: Check if unpacked is there
+        run: |
+          echo "Setup MuC software stack"
+          ls /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim\:latest/
+          source /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim\:latest/etc/profile.d/aliases.sh
+          setup_mucoll
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:

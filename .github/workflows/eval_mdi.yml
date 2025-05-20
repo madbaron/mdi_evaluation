@@ -18,8 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Docker Container
-        uses: addnab/docker-run-action@v3
-        uses: cvmfs-contrib/github-action-cvmfs@v4
+        uses: 
+          - addnab/docker-run-action@v3
+          - cvmfs-contrib/github-action-cvmfs@v4
         with: 
           image: ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
           options: -v /cvmfs:/cvmfs 

@@ -16,14 +16,13 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
-    container: ghcr.io/key4hep/key4hep-images/alma9:latest
     steps:
       - uses: cvmfs-contrib/github-action-cvmfs@v4
       - name: Run Docker Container
         run: |
           echo "Setup MuC software stack"
-          ls /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim\:latest/
-          source /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim\:latest/etc/profile.d/aliases.sh
+          ls /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim-ubuntu24\:latest/
+          source /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim-ubuntu24\:latest/etc/profile.d/aliases.sh
           setup_mucoll
           ddsim --version > /work/ddsim_version.txt
       - name: Upload Artifacts

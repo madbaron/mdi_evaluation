@@ -21,7 +21,7 @@ jobs:
       - name: Run Docker Container
         uses: addnab/docker-run-action@v3
         with:
-          image: /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim-ubuntu24\:latest
+          image: /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim-ubuntu24:latest
           options: -v ${{ github.workspace }}:/work
           run: |
             echo "Setup MuC software stack"

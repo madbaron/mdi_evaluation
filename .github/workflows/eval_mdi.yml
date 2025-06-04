@@ -19,12 +19,14 @@ jobs:
     steps:
       - uses: cvmfs-contrib/github-action-cvmfs@v4
       - name: Run Docker Container
-        run: |
-          echo "Setup MuC software stack"
-          ls /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim-ubuntu24\:latest/
-          source /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim-ubuntu24\:latest/etc/profile.d/aliases.sh
-          setup_mucoll
-          ddsim --version > /work/ddsim_version.txt
+        uses: addnab/docker-run-action@v3
+        with:
+          image: /cvmfs/unpacked.cern.ch/ghcr.io/muoncollidersoft/mucoll-sim-ubuntu24\:latest
+          options: -v ${{ github.workspace }}:/work
+          run: |
+            echo "Setup MuC software stack"
+            setup_mucoll
+            ddsim --version > /work/ddsim_version.txt
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
